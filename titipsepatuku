@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <string.h>
+int count = 0;
+int  value=1;
+struct node {
+   int data;
+   struct node *next;
+};
+
+struct detail{
+	char *merek;
+	char *warna;
+};
+struct masuk{
+	
+	char *user;
+	char *sandi;
+	int loker;	
+	struct detail sepatu; 
+	
+};
+struct masuk data[100];
+void titip();
+void pil_akhir();
+void menu();
+void ambil();
+
+
+
+
+
+int main(){
+	
+	menu();
+
+}
+
+void titip(){
+	
+	char user[10],sandi[10],merek[10],warna[10];
+	system("cls");
+	printf("masukan username:");
+	scanf("%s",&user);
+	data[value].user=user;
+	printf("\nmasukan sandi:");
+	scanf("%s",&sandi);
+	data[value].sandi=sandi;
+	printf("\nmasukan merek sepatu:");
+	scanf("%s",&merek);
+	data[value].sepatu.merek=merek;
+	printf("\nmasukan warna sepatu:");
+	scanf("%s",&warna);
+	data[value].sepatu.warna=warna;
+	data[value].loker=value;
+	printf("\n\n Loker anda ada di nomer:%d\n\n",data[value].loker);
+	value++;
+	printf("kembali ke awal? (y/n)");
+	pil_akhir();
+	
+}
+
+void pil_akhir(){
+		switch(getche()){
+		case 'y':
+			menu();
+			break;
+		case 'n':
+			system("cls");
+			printf("Terima kasih telah menitipkan sepatu kepada kami");
+			printf("Keamanan barang anda prioritas kami");
+			break;
+		default:
+			printf("masukan anda salah");
+			break;
+		}	
+}
+
+void menu(){
+	system("cls");
+	printf("Selamat datang di Titip Sepatu Amanah\n\n\n");
+	printf("Apa yang anda perlukan saat ini?\n\n");
+	printf("1.menitipkan sepatu\n");
+	printf("2.mengambil sepatu\n");
+	printf("3.menampilkan data\n");
+	printf("\n\nmasukan inputan:");
+	
+		switch(getche()){
+		case '1':
+			titip();
+		break;
+		
+		case '2':
+			ambil();
+		break;
+		
+		default:
+			printf("maaf masukan salah");
+		break;
+		}
+}
+
+void ambil(){
+	char userku[10],sandiku[10],user[10],sandi[10];
+	int i,hasiluser=1,hasilsandi=1;
+	system("cls");
+	printf("masukan username anda:");
+	scanf("%s",&userku);
+	printf("masukan katasandi anda:");
+	scanf("%s",&sandiku);
+	
+	for(i=1;i<=value;i++){
+	strcpy(user,data[i].user);
+	hasiluser=strcmpi(user,userku);
+		if(hasiluser==0){
+			strcpy(sandi,data[i].sandi);
+			hasilsandi=strcmpi(sandi,sandiku);
+			break;
+			}		
+	}
+	if(hasiluser!=0){
+		printf("maaf data tidak ditemukan");
+	}
+	else if (hasiluser==0 && hasilsandi!=0){
+		printf("maaf sandi anda salah");
+	}
+	else if(hasiluser==0 && hasilsandi==0){
+		printf("user: %s\n",user);
+		printf("sepatu merek:%s\n",data[i].sepatu.merek);
+		printf("warna:%s\n",data[i].sepatu.warna);
+		printf("loker:%d",data[i].loker);
+		printf("\n\nterima kasih telah menitipkan sepatu kepada kami\n");
+		printf("keamanan sepatu anda adalahprioritas kami\n");
+	}
+	
+}
+	
